@@ -2,3 +2,163 @@
 // Jeg skal lave en raket fra the ground up, som eksploderer og mister opacity jo længere ind i eksplosionen den kommer. Målet er at den upscaler, og ved en speciel mængde af upscaling forsvinder den.
 // Jeg vil undtage lyde som vi er blevet tilbydt at lave.
 // Målet er at lave 2 raketter, en som bare er en cirkel og en anden som er lidt mere 'avanceret' so to speak. Lad os kigge på det.
+// Hermed bruger vi skabelonen;
+Raket1 r1;
+Raket2 r2;
+
+void setup() {
+  size(800, 800);
+
+  r1 = new Raket1();
+  r2 = new Raket2();
+}
+
+
+
+void draw() {
+  background(205);
+ 
+  r1.flyvRaket();
+  r2.flyvRaket();
+  
+  
+}
+
+// Nu definere vi nogle ting vores kode skal forstå for at "carry out" disse handlinger. Vi tager inspiration fra "class_Raket.pde"
+class Raket {
+  PVector location = new PVector(0, height);
+  PVector velocity;
+
+  int dia=5;
+
+  // farver RGB og opauqe værdi alfa
+  int r=int(random(256));
+  int g=int(random(256));
+  int b=int(random(256));
+  int alfa=255;
+
+  int gram = int(random(100, 400));
+  int lunte= int(random(1, 10));
+  float angle=int(random(1, 7));
+  boolean soundPayed = false;
+  boolean lift= true; // bruges til bang lyd
+
+
+  //construktor
+  Raket() {
+    velocity = new PVector(angle, -3);
+  }
+
+
+
+  void visRaket() {
+    fill(0);
+    //noStroke();
+    circle(location.x, location.y, dia);
+    stroke(2);
+  }
+
+ //<>//
+
+
+  void playFireSound() {
+    if (location.y==height) {
+    }
+  }
+
+  void playExplodingSound() {
+    if (!soundPayed && !lift) {
+      soundPayed = true;
+    }
+  }
+
+  void moveRaket() {
+
+    location.add(velocity);
+    if (location.y < gram) { // hvis  jeg har nået toppen og ikke er færdig
+      velocity.x=0.8;
+      velocity.y=-0.1;
+      lift=false;
+    }
+  }
+
+
+  //er raketten færdig??
+  boolean done() {
+    if (location.y<gram ) {
+      return true;
+    }
+    return false;
+  }
+
+
+  void display() {
+    println(location);
+    println(velocity);
+
+    println( dia);
+
+    // farver RGB og opauqe værdi alfa
+    println( r);
+    println( g);
+    println( b);
+    println(alfa);
+
+    println(gram);
+    println(lunte);
+    println(angle);
+    println(soundPayed);
+    println(lift);
+  }
+
+  void flyvRaket() {
+    playFireSound();
+    moveRaket();
+    if (done()) {
+      eksploderRaket();
+    } else {
+      visRaket();
+    }
+    playExplodingSound();
+  }
+
+  void reset() {
+
+
+    // farver RGB og opauqe værdi alfa
+    r=int(random(256));
+    g=int(random(256));
+    b=int(random(256));
+    alfa=255;
+
+    gram = int(random(100, 400));
+    lunte= int(random(1, 10));
+    angle=int(random(1, 7));
+    soundPayed = false;
+    lift= true; // bruges til bang lyd
+    location = new PVector(0, height);
+    velocity = new PVector(angle, -3);
+    dia=5;
+  }
+
+
+
+  void eksploderRaket() {
+  } // made to overwrite
+}
+
+//Nu kan vi gå i gang med vores primære raket. Siden vi har skabt disse klasser fra øverst i teksten, skal vi indsætte den som klasse 1.
+
+class Raket1 extends Raket {
+  void eksploderRaket() {
+if (dia < 500) {
+      fill(r, g, b, alfa);
+      dia++;
+      circle(location.x, location.y, dia);
+      // gør eksplosion gennemsigtig
+      alfa--;
+    }
+  }
+}
+
+// Problemet vi støder på er at raketten har en tendens til at gå forbi muren ind i ingenting, så vi bliver nød til at lave en receptor som gør at den ikke længere gør dette.
