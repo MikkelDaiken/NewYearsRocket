@@ -13,11 +13,11 @@ void setup() {
 void draw() {
   background(255);
 
-  // Draw the expanding circle
+  // Cirklen.
   fill(random(255), random(255), random(255), alpha);
   ellipse(width / 2, height / 2, diameter, diameter);
 
-  // Update variables for next frame
+  // Variabler. Yeah. Woo!
   diameter += growthRate;
   alpha -= 1;
 }
