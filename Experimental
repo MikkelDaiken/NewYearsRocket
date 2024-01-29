@@ -23,6 +23,8 @@ void draw() {
 }
 
 // Dette var med primær hjælp af ChatGPT, en anden jeg fik hjælp til var fra Josva.
+
+
 // Vi bruger 2 branches her.
 // Branch 1:
 class Rocket {
@@ -105,7 +107,6 @@ void setup() {
   }
 }
 void draw() {
-  background(26, 25, 58);
   //fill(i, 0, 175, alpha);
   Sova2.timer();
   //drawCircle();
