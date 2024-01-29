@@ -1,0 +1,23 @@
+// ok so this is the REALLL one i PROMISSSEEEEE
+// jeg har brugt chatgpt til denne, for at udforske nogle andre variabler :thinking_emoji:
+// idk man have fun!
+
+float diameter = 10; // Initiere diameter.
+float growthRate = 2; // Hvor hurtig vores cirkel bliver stor.
+int alpha = 255; // Alpha eller transparency value, eller noget. Det var den måde jeg fandt en måde at formindske opaciteten.
+
+void setup() {
+  size(800, 800);
+}
+
+void draw() {
+  background(255);
+
+  // Draw the expanding circle
+  fill(random(255), random(255), random(255), alpha);
+  ellipse(width / 2, height / 2, diameter, diameter);
+
+  // Update variables for next frame
+  diameter += growthRate;
+  alpha -= 1;
+}
