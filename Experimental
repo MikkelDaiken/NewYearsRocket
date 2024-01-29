@@ -21,3 +21,104 @@ void draw() {
   diameter += growthRate;
   alpha -= 1;
 }
+
+// Dette var med primær hjælp af ChatGPT, en anden jeg fik hjælp til var fra Josva.
+// Vi bruger 2 branches her.
+// Branch 1:
+class Rocket {
+  float krut=random(100, 400);
+  float xPos=0;
+  float yPos=800;
+  int dia = 10;
+  int lunte = 0;
+  int alpha=255;
+  int r=int(random(255));
+  int g=int(random(255));
+  int b=int(random(255));
+  float angle=random(1, 3);
+  int i;
+
+  //No constructor
+  void move() {
+    xPos=xPos+angle;
+    yPos -=2;
+  }
+
+  void timer() {
+    if (lunte < frameCount) {
+      if (krut>yPos) {
+        splode();
+      } else {
+        move();
+      }
+      vis();
+    }
+  }
+
+  void vis() {
+    if (yPos>krut) {
+      fill(0);
+    } else {
+      fill(r, g, b, alpha);
+    }
+    circle(xPos, yPos, dia);
+  }
+  //Her laves slode funktionen
+  void splode() {
+  }//Lavet til at overwrite
+}
+
+//Nedarving
+/*
+class Sova1 extends Rocket {
+  void splode() {
+    if (i<320) {
+      circle(400, 400, i);
+
+      i=i+1;
+    }
+  }
+}
+*/
+class Sova2 extends Rocket {
+  void splode() {
+    fill(255, 0, 0);
+    dia++;
+    alpha--;
+  }
+}
+
+// Branch 2:
+
+//Deklarering a raket
+//Rocket Sova1 = new Sova1();
+Rocket Sova2 = new Sova2();
+//deklarering af batteri
+Rocket[] batteri = new Rocket[100];
+
+
+void setup() {
+  size(800, 800);
+  frameRate(60);
+  for (int i=0; i<batteri.length; i++){
+    batteri[i] = new Sova2();
+  }
+}
+void draw() {
+  background(26, 25, 58);
+  //fill(i, 0, 175, alpha);
+  Sova2.timer();
+  //drawCircle();
+}
+
+/*
+void drawCircle() {
+  if (i<320) {
+    circle(400, 400, i);
+
+    i=i+1;
+  } else {
+    textSize(150);
+    text("boom",400,600);
+  }
+}*/
