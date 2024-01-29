@@ -1,8 +1,8 @@
 // John 1:1
 // Jeg skal lave en raket fra the ground up, som eksploderer og mister opacity jo længere ind i eksplosionen den kommer. Målet er at den upscaler, og ved en speciel mængde af upscaling forsvinder den.
 // Jeg vil undtage lyde som vi er blevet tilbydt at lave.
-// Målet er at lave 2 raketter, en som bare er en cirkel og en anden som er lidt mere 'avanceret' so to speak. Lad os kigge på det.
-// Hermed bruger vi skabelonen;
+// PLEASE NOTE!!!
+// Dette er en recreation, ikke en original idé. Jeg har et andet dokument som heder "Experimental" hvor jeg laver min egen originale.
 Raket1 r1;
 Raket2 r2;
 
